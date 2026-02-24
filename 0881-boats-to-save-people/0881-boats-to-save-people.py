@@ -5,14 +5,9 @@ class Solution:
         j = len(people)-1
         i = 0
         while i <= j:
-            if people[i] == limit:
-                boats += 1
-            else:
-                if people[i] + people[j] <= limit:
-                    boats += 1
-                    j -= 1
-                else:
-                    boats += 1
+            if people[i] + people[j] <= limit:
+                j -= 1
+            boats += 1
             i += 1
         return boats
 
