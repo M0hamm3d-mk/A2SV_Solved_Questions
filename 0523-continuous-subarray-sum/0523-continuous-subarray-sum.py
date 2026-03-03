@@ -3,7 +3,7 @@ class Solution:
         n = len(nums)
         pre = 0
         memo = {0:-1}
-        print(0%1)
+        
         for i in range(n):
             pre += nums[i]
 
