@@ -5,8 +5,7 @@ class Solution:
         for i in path:
             if i != '' and i != '.':
                 temp.append(i)
-        print(path)
-        print(temp)
+      
         stack = ['/']
         for i in temp:
             if i  == '..':
