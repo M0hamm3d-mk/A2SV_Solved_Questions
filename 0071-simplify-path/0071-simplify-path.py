@@ -12,7 +12,8 @@ class Solution:
             if i  == '..':
                 if stack:
                     stack.pop()
-              
+                if stack:
+                    stack.pop()
             else:
                 if not stack or stack[-1] != '/':
                     stack.append('/')
