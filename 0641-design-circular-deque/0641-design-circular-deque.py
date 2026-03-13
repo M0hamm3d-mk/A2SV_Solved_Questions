@@ -14,48 +14,59 @@ class MyCircularDeque:
     def insertFront(self, value: int) -> bool:
         if self.n >= self.k:
             return False
-        node = ListNode(value,self.front,)
-        self.front.prev = node
-        self.front = node
+        if self.n == 0 or self.front.val == -1:
+            node = ListNode(value)
+            self.front = node
+            self.rear = node
+        else:
+            node = ListNode(value,self.front,)
+            self.front.prev = node
+            self.front = node
         self.n += 1
         return True
 
     def insertLast(self, value: int) -> bool:
         if self.n >= self.k:
             return False
-        node = ListNode(value,None,self.rear)
-        self.rear.next = node
-        self.rear = node
+        
+        if self.n == 0 or self.rear.val == -1:
+            node = ListNode(value)
+            self.rear = node
+            self.front = node
+        else:
+            node = ListNode(value,None,self.rear)
+            self.rear.next = node
+            self.rear = node
         self.n += 1
         return True
         
 
     def deleteFront(self) -> bool:
-        if self.n == 0:
+        if self.n == 0 or  self.front.val == -1:
             return False
         self.front = self.front.next
-        self.front.prev = None 
+        if self.front:
+            self.front.prev = None 
         self.n -= 1
         return True
 
     def deleteLast(self) -> bool:
-        if self.n == 0:
+        if self.n == 0 or self.rear.val == -1 :
             return False
         self.rear = self.rear.prev
-        self.rear.next = None 
         self.n -= 1
         return True
         
 
     def getFront(self) -> int:
         if self.n == 0:
-            return False
+            return -1
         return self.front.val
         
 
     def getRear(self) -> int:
         if self.n == 0:
-            return False
+            return -1
         return self.rear.val
         
 
