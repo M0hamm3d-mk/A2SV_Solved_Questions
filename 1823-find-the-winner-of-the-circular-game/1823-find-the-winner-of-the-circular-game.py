@@ -1,18 +1,25 @@
 class Solution:
     def findTheWinner(self, n: int, k: int) -> int:
         nums = [x for x in range(1,n+1)]
-        def ellinator(players,k):
-            if len(players) == 1:
+        def helper(players,k):
+            m = len(players)
+            if m == 1:
                 return players[0]
-            size = len(players) * k + 2
+            size = m * k + 2
             for i in range(size):
-               if i % size == k - 1:
-                    if (k-1) % len(players) == len(players) - 1:
+                if i % size == k - 1:
+                    # if the last player is gonna be elliminated
+                    if (k-1) % m == m - 1:
                        players.pop()
-                       return ellinator(players,k)
-                    elif (k-1) % len(players) == 0:
-                       return ellinator(players[1:],k)
+                       return helper(players,k)
+
+                    # if the first player is gonna be elliminated
+                    elif (k-1) % m == 0:
+                       return helper(players[1:],k)
+
+                    # any player in the middle is gonna be elliminated
                     else:
-                        return ellinator(players[k % len(players):] + players[:(k-1)%len(players)],k)
-        return ellinator(nums,k)
+                        return helper(players[k % m:] + players[:(k-1)%m],k)
+                        
+        return helper(nums,k)
         
