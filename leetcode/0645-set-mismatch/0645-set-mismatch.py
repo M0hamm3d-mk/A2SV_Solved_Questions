@@ -1,7 +1,7 @@
 class Solution:
     def findErrorNums(self, arr: List[int]) -> List[int]:
         i = 0
-        dup = []
+        dup = None
         while i < len(arr):
             correct_pos = arr[i] - 1
             if i != correct_pos:
