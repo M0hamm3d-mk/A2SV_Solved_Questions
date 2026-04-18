@@ -4,12 +4,12 @@ class Solution:
         self.depth = depth
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         if not root:
-            return
+            return 0
         else:
             self.depth += 1
             self.mx = max(self.mx,self.depth)
             self.maxDepth(root.left)
             self.maxDepth(root.right)
             self.depth -= 1
-        return self.mx if root else 0
+        return self.mx
         
