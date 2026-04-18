@@ -10,13 +10,8 @@ class Solution:
             if not r:
                 return TreeNode(v)
             if r.val < v:
-                if not r.right:
-                    r.right = TreeNode(v)
-                    return root
-                return insert(r.right,val)
+                r.right =  insert(r.right,v)
             else:
-                if not r.left:
-                    r.left = TreeNode(v)
-                    return root
-                return insert(r.left,v)
+                r.left =  insert(r.left,v)
+            return r
         return insert(root,val)
