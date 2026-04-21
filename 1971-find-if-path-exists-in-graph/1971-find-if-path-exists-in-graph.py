@@ -11,12 +11,11 @@ class Solution:
         def dfs(node):
             if node == destination:
                 return True
-            visited[node] = True
 
             for neighbour in edge_list[node]:
                 if not visited[neighbour]:
-                    found = dfs(neighbour)
-                    if found:
+                    visited[node] = True
+                    if dfs(neighbour):
                         return True
 
         return bool(dfs(source))
