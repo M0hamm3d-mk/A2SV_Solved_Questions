@@ -7,16 +7,16 @@ class Solution:
             edge_list[v].append(u)
 
         visited = [False] * n
-        
-        def dfs(node):
+        stack = [source]
+
+        while stack:
+            node = stack.pop()
+
             if node == destination:
                 return True
 
             for neighbour in edge_list[node]:
                 if not visited[neighbour]:
-                    visited[node] = True
-                    if dfs(neighbour):
-                        return True
-            return False
-
-        return dfs(source)
+                    visited[neighbour] = True
+                    stack.append(neighbour)
+        return False
