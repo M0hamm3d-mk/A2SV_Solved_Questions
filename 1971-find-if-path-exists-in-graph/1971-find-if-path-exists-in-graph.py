@@ -17,5 +17,6 @@ class Solution:
                     visited[node] = True
                     if dfs(neighbour):
                         return True
+            return False
 
-        return bool(dfs(source))
+        return dfs(source)
