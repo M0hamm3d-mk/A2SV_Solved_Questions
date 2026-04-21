@@ -3,7 +3,6 @@ class Solution:
         n = len(grid)
         m = len(grid[0])
 
-        visited = [[False for _ in range(m)] for _ in range(n)]
         directions = [(1,0),(-1,0),(0,1),(0,-1)]
         island = 0
 
@@ -12,18 +11,17 @@ class Solution:
 
         def dfs(row,col):
             nonlocal island
+            grid[row][col] = '0'
 
             for r,c in directions:
                 new_row = row + r
                 new_col = col + c
-
-                if inbound(new_row,new_col) and not visited[new_row][new_col] and grid[new_row][new_col] == '1':
-                    visited[new_row][new_col] = True
+                if inbound(new_row,new_col)  and grid[new_row][new_col] == '1':
                     dfs(new_row,new_col)
+                    
         for row in range(n):
             for col in range(m):
-                if grid[row][col] == '1' and not visited[row][col]:
-                    visited[row][col] = True
+                if grid[row][col] == '1':
                     dfs(row,col)
                     island += 1
         return island
