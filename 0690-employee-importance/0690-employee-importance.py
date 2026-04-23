@@ -19,7 +19,5 @@ class Solution:
             for s in e.subordinates:
                 dfs(findEmployee[s])
 
-        for e in employees:
-            if e.id == id:
-                dfs(e)
-                return total_iv
+        dfs(findEmployee[id])
+        return total_iv
