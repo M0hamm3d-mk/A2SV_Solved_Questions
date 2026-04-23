@@ -11,16 +11,13 @@ class Solution:
     def getImportance(self, employees: List['Employee'], id: int) -> int:
         total_iv = 0
 
-        def findEmployee(id):
-            for e in employees:
-                if e.id == id:
-                    return e
+        findEmployee = {e.id: e for e in employees}
 
         def dfs(e):
             nonlocal total_iv
             total_iv += e.importance
             for s in e.subordinates:
-                dfs(findEmployee(s))
+                dfs(findEmployee[s])
 
         for e in employees:
             if e.id == id:
