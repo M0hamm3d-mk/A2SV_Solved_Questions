@@ -1,15 +1,5 @@
 class Solution:
     def maximumGap(self, nums: List[int]) -> int:
-        def insertion_sort(bucket):
-            for i in range(1, len(bucket)):
-                key = bucket[i]
-                j = i - 1
-                while j >= 0 and bucket[j] > key:
-                    bucket[j + 1] = bucket[j]
-                    j -= 1
-                bucket[j + 1] = key
-            return bucket
-
         def bucket_sort(arr, n):
             mx,mn = max(arr),min(arr)
             rn = mx - mn 
@@ -21,7 +11,7 @@ class Solution:
                 bucket[idx].append(arr[i])
             res = []
             for b in bucket:
-                res.extend(insertion_sort(b))
+                res.extend(sorted(b))
             return res
         if len(nums) < 2:
             return 0
