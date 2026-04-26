@@ -3,11 +3,17 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        from collections import Counter
-        C = Counter(nums)
-        ans = []
-        for i in sorted(C.keys()):
-            ans.extend([i] * C[i])
-        for i in range(len(nums)):
-            nums[i] = ans[i]
-        return nums
+        n = len(nums)
+        zero,one,two = 0,0,n-1
+
+        while one <= two:
+            if nums[one] == 0:
+                nums[one],nums[zero] = nums[zero],nums[one]
+
+                zero += 1
+                one += 1
+            elif nums[one] == 2:
+                nums[one],nums[two] = nums[two],nums[one]
+                two -= 1
+            else:
+                one += 1
