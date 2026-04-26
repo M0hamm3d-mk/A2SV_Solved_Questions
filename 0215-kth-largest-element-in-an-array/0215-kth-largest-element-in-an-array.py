@@ -1,23 +1,32 @@
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
+        import random
         n = len(nums)
-
         k = n - k
 
-        def quickSelect(l,r):
-            pv,p = nums[r],l
-            for i in range(l,r):
-                if nums[i] < pv:
-                    nums[p],nums[i] = nums[p],nums[i]
-                    p += 1
-            nums[p],nums[r] = nums[r],nums[p]
+        def quickSelect(l, r):
+            pivot = nums[random.randint(l, r)]
 
-            if p > k :
-                return quickSelect(l,p-1)
-            elif p < k:
-                return quickSelect(p+1,r)
+            left, i, right = l, l, r
+            while i <= right:
+
+                if nums[i] < pivot:
+                    nums[left], nums[i] = nums[i], nums[left]
+                    left += 1
+                    i += 1
+
+                elif nums[i] > pivot:
+                    nums[right], nums[i] = nums[i], nums[right]
+                    right -= 1
+                    
+                else:
+                    i += 1
+
+            if k < left:
+                return quickSelect(l, left - 1)
+            elif k > right:
+                return quickSelect(right + 1, r)
             else:
-                return nums[p]
+                return nums[k]
 
-        return quickSelect(0,n-1)
-        
+        return quickSelect(0, n - 1)
