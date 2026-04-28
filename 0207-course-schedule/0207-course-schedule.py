@@ -5,7 +5,7 @@ class Solution:
         graph = defaultdict(list)
 
         for a,b in prerequisites:
-            graph[a].append(b)
+            graph[b].append(a)
 
         color = [0] * numCourses
         # 0 not checked, 1 not taken -1 already taken
