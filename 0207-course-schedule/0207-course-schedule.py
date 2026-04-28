@@ -4,31 +4,33 @@ class Solution:
  
         graph = defaultdict(list)
 
+        indegree = [0] * (numCourses)
         for a,b in prerequisites:
             graph[b].append(a)
+            indegree[a] += 1
+        # print(indegree)
+        # print(graph)
 
-        color = [0] * numCourses
-        # 0 not checked, 1 not taken -1 already taken
+        q = deque()
+        ans = []
+        for i,j in enumerate(indegree):
+            if j == 0:
+                q.append(i)
+        # print(q)
 
-        def dfs(course):
+        while q:
+            course = q.popleft()
+            ans.append(course)
 
-            if color[course] == 1:
-                return False
+            for c in graph[course]:
+                indegree[c] -= 1
+                if indegree[c] == 0:
+                    q.append(c)
+            
 
-            elif color[course] == -1:
-                return True
-
-            color[course] = 1
-            for pre in graph[course]:
-                if not dfs(pre):
-                    return False
-
-            color[course] = -1
+        if len(ans) == numCourses:
             return True
 
-        for i  in range(numCourses):
-            if not dfs(i):
-                return False
-                
-        return True
+        return False
+        
             
