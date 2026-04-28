@@ -21,7 +21,7 @@ class Solution:
                 nr = r + dr
                 nc = c + dc
          
-                print(nr, nc)
+                # print(nr, nc)
                 if inbound(nr,nc) and  grid[nr][nc] == grid[r][c]:
                     if not visited[nr][nc]:
                         # visited[nr][nc] = True
