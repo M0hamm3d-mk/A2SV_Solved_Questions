@@ -1,8 +1,7 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
 
-        if not prerequisites:
-            return True
+ 
         graph = defaultdict(list)
 
         for a,b in prerequisites:
