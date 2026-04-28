@@ -22,13 +22,14 @@ class Solution:
 
             for c in graph[course]:
                 indegree[c] -= 1
-            
-            for c in graph[course]:
                 if indegree[c] == 0:
                     q.append(c)
+            
+            # for c in graph[course]:
 
         if len(ans) == numCourses:
             return ans
+
         return []
         
             
