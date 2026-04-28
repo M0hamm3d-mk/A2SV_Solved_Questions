@@ -2,34 +2,36 @@ class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
         graph = defaultdict(list)
 
-        indegree = [0] * (numCourses)
         for a,b in prerequisites:
             graph[b].append(a)
-            indegree[a] += 1
-        # print(indegree)
-        # print(graph)
 
-        q = deque()
-        ans = []
-        for i,j in enumerate(indegree):
-            if j == 0:
-                q.append(i)
-        # print(q)
+        color = [0] * numCourses
+        # 0 not checked, 1 not taken -1 already taken
+        res = []
+        def dfs(course):
 
-        while q:
-            course = q.popleft()
-            ans.append(course)
+            if color[course] == 1:
+                return False
 
-            for c in graph[course]:
-                indegree[c] -= 1
-                if indegree[c] == 0:
-                    q.append(c)
-            
-            # for c in graph[course]:
+            # elif color[course] == -1:
+            #     return True
 
-        if len(ans) == numCourses:
-            return ans
+            color[course] = 1
+            for pre in graph[course]:
+                if color[pre] == -1:
+                    continue
+                if not dfs(pre):
+                    return False
 
-        return []
-        
+            color[course] = -1
+
+            res.append(course)
+            return True
+
+        for i  in range(numCourses):
+            if color[i] != -1:
+                if not dfs(i):
+                    return []
+                    
+        return res[::-1]
             
