@@ -11,19 +11,18 @@ class Solution:
         for i in range(numCourses):
             if indegree[i] == 0:
                 q.append(i)
-        parent = defaultdict(list)
+        parent = defaultdict(set)
 
         while q:
             course = q.popleft()
             for nei in graph[course]:
                 indegree[nei] -= 1
                 if parent[course]:
-                    parent[nei].extend(set(parent[course]))
-                parent[nei].append(course)
+                    parent[nei].update(parent[course])
+                parent[nei].add(course)
                 if indegree[nei] == 0:
                     q.append(nei)
-        for i in range(len(parent)):
-            parent[i] = set(parent[i])
+        
         ans = []
         for u,v in queries:
             if u in parent[v]:
