@@ -1,33 +1,26 @@
 class Solution:
-    def assignTasks(self, servers: List[int], tasks: List[int]) -> List[int]:
-        n = len(tasks)
-        m = len(servers)
-        free = []
-        for i in range(len(servers)):
-            heappush(free,[servers[i],i])
-        
-        # print(free)
+    def assignTasks(self, servers: list[int], tasks: list[int]) -> list[int]:
+        n = len(servers)
+        m = len(tasks)
+        ans = [0] * m
+
+        free = [(servers[i], i) for i in range(n)]
+        heapq.heapify(free)
+
         busy = []
-        ans = []
         time = 0
-        i = 0  # task
-        while i < n:
-            
-            # remove free servers from list of busy servers
-            while busy and busy[0][0] <= time:
-                heappush(free,heappop(busy)[1:])
-            
-            if free:
-                w,idx = heappop(free)
-                heappush(busy,[time + tasks[i],w,idx])
-                i += 1
-                ans.append(idx)
-            else:
+        for j in range(m):
+            time = max(time,j)
+
+            if not free:
                 time = busy[0][0]
-            time = max(time,i)
+
+            while busy and busy[0][0] <= time:
+                finish, weight, idx = heapq.heappop(busy)
+                heapq.heappush(free, (weight, idx))
+
+            weight, idx = heapq.heappop(free)
+            ans[j] = idx
+            heapq.heappush(busy, (time + tasks[j], weight, idx))
+
         return ans
-
-            
-
-
-
