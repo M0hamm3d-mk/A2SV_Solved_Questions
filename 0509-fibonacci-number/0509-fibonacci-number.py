@@ -1,10 +1,6 @@
 class Solution:
     def fib(self, n: int) -> int:
-        memo = {0:0,1:1}
-        def dp(num,memo):
-            if num in memo:
-                return memo[num]
-            memo[num] = dp(num-1,memo) + dp(num-2,memo)
-            return memo[num]
-        return dp(n,memo)
+        if n == 0 or n == 1:
+            return n
+        return self.fib(n-1) + self.fib(n-2)
         
